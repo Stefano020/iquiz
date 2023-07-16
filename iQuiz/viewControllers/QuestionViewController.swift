@@ -24,8 +24,17 @@ class QuestionViewController: UIViewController {
         if sender.tag == questions[questionNumber].correctAnswer {
             userPoints += 1
             
+            for answerButton in answerButtons {
+                answerButton.isEnabled = false
+            }
+            
             sender.backgroundColor = UIColor.successBackgroundColor
+            
         } else {
+            for answerButton in answerButtons {
+                answerButton.isEnabled = false
+            }
+            
             sender.backgroundColor = UIColor.errorBackgroundColor
         }
         
@@ -36,6 +45,11 @@ class QuestionViewController: UIViewController {
             if (self.numberOfAnsweredQuestions < 5) {
                 self.questionNumber += 1
                 sender.backgroundColor = UIColor.customBackgroundColor
+                
+                for answerButton in answerButtons {
+                    answerButton.isEnabled = true
+                }
+                
                 self.configureQuestion()
             } else {
                 goToResultsPage()
